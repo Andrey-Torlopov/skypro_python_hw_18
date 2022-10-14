@@ -1,5 +1,5 @@
 from app.database import db
-
+from marshmallow import Schema, fields
 
 class Movie(db.Model):
     __tablename__ = 'movie'
@@ -14,3 +14,13 @@ class Movie(db.Model):
 
     genre = db.relationship("genre", foreign_keys=[genre_id])
     executor = db.relationship("genre", foreign_keys=[director_id])
+
+class MovieScheme(Schema):
+    id = fields.Int()
+    name = fields.Str()
+    description = fields.Str()
+    trailer = fields.Str()
+    year = fields.Int()
+    raiting = fields.Str()
+    genre_id = fields.Int()
+    director_id = fields.Int()
