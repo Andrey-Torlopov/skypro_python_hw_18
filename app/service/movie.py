@@ -20,8 +20,8 @@ class MovieService:
     def get_one(self, uid: int) -> Movie:
         return self.dao.get_one(uid)
 
-    def get_all(self) -> list[Movie]:
-        return self.dao.get_all()
+    def get_all(self, director_id:int=None, genre_id:int=None, year:int=None) -> list[Movie]:
+        return self.dao.get_all(director_id=director_id, genre_id=genre_id, year=year)
 
     def update(self, data):
         '''
@@ -57,3 +57,7 @@ class MovieService:
             model.director_id = data.get('director_id')
 
         self.dao.update(model)
+
+    def delete(self, uid: int):
+        uid = data.get('id')
+        self.dao.delete(uid)
