@@ -10,7 +10,7 @@ model_schemes = GenreScheme()
 class GenresView(Resource):
     def get(self):
         models = service.get_all()
-        models_scheme.dump(models), 200
+        return models_scheme.dump(models), 200
 
 
 @genre_ns.route('/<int:id>')

@@ -1,6 +1,7 @@
 from flask_restx import Resource, Namespace
 from app.service_container import movie_service as service
 from app.dao.models.movie import MovieScheme
+from flask import request
 
 movies_ns = Namespace('movies')
 models_scheme = MovieScheme(many=True)
@@ -24,6 +25,7 @@ class MoviesView(Resource):
         if "year" in args:
             year = args.get("year")
         models = service.get_all(director_id=director_id, genre_id=genre_id, year=year)
+        print(models)
         return models_scheme.dump(models), 200
 
     def post(self):

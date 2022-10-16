@@ -7,6 +7,8 @@ from app.views.genre import genre_ns
 from app.views.director import directors_ns
 from app.views.movie import movies_ns
 
+from app.migrate import prepeare_data
+
 def configure_app(application: Flask):
     ''' Configure flask app. Api with namespaces and create data.'''
     with application.app_context():
@@ -24,9 +26,7 @@ def create_data(app, db):
     with app.app_context():
         db.create_all()
 
-#       создать несколько сущностей чтобы добавить их в БД
-        # with db.session.begin():
-            # db.session.add_all(здесь список созданных объектов)
+        prepeare_data()
 
 if __name__ == '__main__':
     app = create_app()
