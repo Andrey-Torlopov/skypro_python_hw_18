@@ -32,5 +32,3 @@ if __name__ == '__main__':
     app = create_app()
     configure_app(app)
     app.run()
-
-

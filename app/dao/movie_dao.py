@@ -14,6 +14,7 @@ class MovieDAO:
         model = Movie(**data)
         self.session.add(model)
         self.session.commit()
+        return model
 
     def update(self, model):
         self.session.add(model)

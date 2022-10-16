@@ -1,7 +1,14 @@
 # Тут создаем DAO и сервисы, чтобы импортировать их например во вьюшках
+from app.database import db
+from app.dao.movie_dao import MovieDAO
+from app.dao.genre_dao import GenreDAO
+from app.dao.director_dao import DirectorDAO
 
-# book_dao = BookDAO(db.session)
-# book_service = BookService(dao=book_dao)
-#
-# review_dao = ReviewDAO(db.session)
-# review_service = ReviewService(dao=review_dao)
+movie_dao = MovieDAO(db.session)
+# movie_service = BookService(dao=book_dao)
+
+genre_dao = GenreDAO(db.session)
+# genre_service = BookService(dao=book_dao)
+
+director_dao = DirectorDAO(db.session)
+# director_service = BookService(dao=book_dao)
