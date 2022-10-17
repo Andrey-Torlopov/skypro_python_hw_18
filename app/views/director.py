@@ -20,4 +20,3 @@ class DirectorView(Resource):
             return model_schemes.dump(model), 200
         except Exception as e:
             return str(e), 404
-        return "", 200

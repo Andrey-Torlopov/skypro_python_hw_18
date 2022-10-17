@@ -44,7 +44,7 @@ class MovieView(Resource):
     def put(self, id: int):
         try:
             data = request.json
-            service.update(data)
+            service.update(data, id)
             return "", 204
         except Exception as e:
             return str(e), 404
@@ -52,7 +52,7 @@ class MovieView(Resource):
     def patch(self, id: int):
         try:
             data = request.json
-            service.particular_update(data)
+            service.particular_update(data, id)
             return "", 204
         except Exception as e:
             return str(e), 404

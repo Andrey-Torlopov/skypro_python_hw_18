@@ -17,7 +17,7 @@ class GenresView(Resource):
 class GenreView(Resource):
     def get(self, id: int):
         try:
-            model = genre_service.get_one(id)
+            model = service.get_one(id)
             return model_schemes.dump(model), 200
         except Exception as e:
             return str(e), 404

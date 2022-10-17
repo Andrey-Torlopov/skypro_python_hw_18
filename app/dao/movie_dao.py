@@ -11,13 +11,13 @@ class MovieDAO:
         data = self.session.query(Movie)
 
         if director_id is not None:
-            data = data.filter(models.Movie.director_id == director_id)
+            data = data.filter(Movie.director_id == director_id)
 
         if genre_id is not None:
-            data = data.filter(models.Movie.genre_id == genre_id)
+            data = data.filter(Movie.genre_id == genre_id)
 
         if year is not None:
-            data = data.filter(models.Movie.year == year)
+            data = data.filter(Movie.year == year)
 
         return data.all()
 

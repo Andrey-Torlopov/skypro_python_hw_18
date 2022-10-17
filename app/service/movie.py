@@ -23,16 +23,16 @@ class MovieService:
     def get_all(self, director_id:int=None, genre_id:int=None, year:int=None) -> list[Movie]:
         return self.dao.get_all(director_id=director_id, genre_id=genre_id, year=year)
 
-    def update(self, data):
+    def update(self, data, uid):
         '''
         data - json
         '''
-        uid = data.get('id')
+        uid = data.get(uid)
         model = Movie(**data)
         self.dao.update(model)
 
-    def particular_update(self, data):
-        uid = data.get('id')
+    def particular_update(self, data, uid):
+        uid = data.get(uid)
         model = self.get_one(uid)
 
         if 'name' in data:
@@ -47,8 +47,8 @@ class MovieService:
         if 'year' in data:
             model.year = data.get('year')
 
-        if 'raiting' in data:
-            model.raiting = data.get('raiting')
+        if 'rating' in data:
+            model.rating = data.get('rating')
 
         if 'genre_id' in data:
             model.genre_id = data.get('genre_id')
