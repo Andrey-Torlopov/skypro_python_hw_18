@@ -32,7 +32,6 @@ class MovieService:
         self.dao.update(model)
 
     def particular_update(self, data, uid):
-        uid = data.get(uid)
         model = self.get_one(uid)
 
         if 'name' in data:

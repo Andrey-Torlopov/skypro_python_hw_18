@@ -29,8 +29,11 @@ class MoviesView(Resource):
         return models_scheme.dump(models), 200
 
     def post(self):
-        return "", 201
-
+        try:
+            service.create(request.json)
+            return "", 201
+        except Exception as e:
+            return str(e), 404
 
 @movies_ns.route('/<int:id>')
 class MovieView(Resource):
