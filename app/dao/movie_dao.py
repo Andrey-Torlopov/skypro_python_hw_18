@@ -27,8 +27,8 @@ class MovieDAO:
         self.session.commit()
         return model
 
-    def update(self, model: Movie) -> None:
-        self.session.add(model)
+    def update(self, data, uid) -> None:
+        self.session.query(Movie).filter(Movie.id == uid).update(data)
         self.session.commit()
 
     def delete(self, uid: int) -> None:

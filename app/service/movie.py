@@ -1,11 +1,3 @@
-# здесь бизнес логика, в виде классов или методов. сюда импортируются DAO классы из пакета dao и модели из dao.model
-# некоторые методы могут оказаться просто прослойкой между dao и views,
-# но чаще всего будет какая-то логика обработки данных сейчас или в будущем.
-
-# Тут возвращаются модели.
-# А вьюшка уже их переводит куда надо. В json или иной объект
-
-# Пример
 from app.service_container import MovieDAO
 from app.dao.models.movie import Movie
 
@@ -24,16 +16,17 @@ class MovieService:
         return self.dao.get_all(director_id=director_id, genre_id=genre_id, year=year)
 
     def update(self, data, uid):
-        '''
-        data - json
-        '''
-        uid = data.get(uid)
-        model = Movie(**data)
+        '''Update model full and particular'''
+        model = self.get_one(uid)
+        model = self._update_if_possible(model, data)
         self.dao.update(model)
 
-    def particular_update(self, data, uid):
-        model = self.get_one(uid)
+    def delete(self, uid: int):
+        self.dao.delete(uid)
 
+    # Private
+
+    def _update_if_possible(self, model: Movie, data: dict[str, str]) -> Movie:
         if 'name' in data:
             model.name = data.get('name')
 
@@ -55,8 +48,4 @@ class MovieService:
         if 'director_id' in data:
             model.director_id = data.get('director_id')
 
-        self.dao.update(model)
-
-    def delete(self, uid: int):
-        uid = data.get('id')
-        self.dao.delete(uid)
+        return model
