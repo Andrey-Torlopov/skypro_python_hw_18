@@ -35,3 +35,30 @@ class MovieDAO:
         model = self.get_one(uid)
         self.session.delete(model)
         self.session.commit()
+
+    def update_particular(self, data: dict[str, str], uid: int) -> None:
+        model = self.get_one(uid)
+
+        if 'name' in data:
+            model.name = data.get('name')
+
+        if 'description' in data:
+            model.description = data.get('description')
+
+        if 'trailer' in data:
+            model.trailer = data.get('trailer')
+
+        if 'year' in data:
+            model.year = data.get('year')
+
+        if 'rating' in data:
+            model.rating = data.get('rating')
+
+        if 'genre_id' in data:
+            model.genre_id = data.get('genre_id')
+
+        if 'director_id' in data:
+            model.director_id = data.get('director_id')
+
+        self.session.add(model)
+        self.session.commit()

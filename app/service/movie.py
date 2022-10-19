@@ -15,37 +15,11 @@ class MovieService:
     def get_all(self, director_id:int=None, genre_id:int=None, year:int=None) -> list[Movie]:
         return self.dao.get_all(director_id=director_id, genre_id=genre_id, year=year)
 
-    def update(self, data, uid):
-        '''Update model full and particular'''
-        model = self.get_one(uid)
-        model = self._update_if_possible(model, data)
-        self.dao.update(model)
+    def update(self, data: dict[str, str], uid: int) -> None:
+        self.dao.update(data, uid)
+
+    def update_particular(self, data: dict[str, str], uid: int) -> None:
+        self.dao.update_particular(data, uid)
 
     def delete(self, uid: int):
         self.dao.delete(uid)
-
-    # Private
-
-    def _update_if_possible(self, model: Movie, data: dict[str, str]) -> Movie:
-        if 'name' in data:
-            model.name = data.get('name')
-
-        if 'description' in data:
-            model.description = data.get('description')
-
-        if 'trailer' in data:
-            model.trailer = data.get('trailer')
-
-        if 'year' in data:
-            model.year = data.get('year')
-
-        if 'rating' in data:
-            model.rating = data.get('rating')
-
-        if 'genre_id' in data:
-            model.genre_id = data.get('genre_id')
-
-        if 'director_id' in data:
-            model.director_id = data.get('director_id')
-
-        return model
